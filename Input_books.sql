@@ -31,3 +31,40 @@ INSERT INTO book(title, author, published, isbn, category, page_count, publisher
 VALUES ('Władca Pierścieni Drużyna Pierscienia T.1', 'Tolkien J. R. R.', '2002-07-01', '900-83-333-0040-7', 'Powieść fantastyczn', 780, 'MUZA S.A.', 41.00);
 
 DESC book;
+
+# 2.Wyświetl książki z kategorii Klasyka polska.
+SELECT * from book where category LIKE '%Klasyka polska%';	
+
+# 3.Policz ile jest książek w przedziale cenowym 10 -30 zł.
+SELECT count(*) FROM book WHERE price BETWEEN 10 AND 30;
+
+# 4.Wyświetl najmniejszą liczbę stron w książkach.
+SELECT MIN(page_count), MAX(page_count) from book;	
+
+#	5.Wyświetl tytuł książki z największą ilością stron.
+SELECT title FROM book WHERE page_count = (SELECT MAX(page_count)from book);
+
+#	6.Wyświetl książki wydane przed 2000 rokiem.
+SELECT * FROM book WHERE published < '2000-01-01';
+
+#	7.Policz ile książek wydało każde z wydawnictw po 2000 roku.
+SELECT count(*), publisher 
+FROM book 
+WHERE published >'2000-01-01' 
+GROUP BY publisher;
+#	8.Policz jaka jest suma stron książek wydanych przez wydawnictwo PWN.
+
+#	9.Wyświetl kategorie książek dla których istnieją co najmniej 2 książki, których cena jest większa od 10.01 zł.
+
+#	10.Wyświetl tytuły książek posortowane alfabetycznie w porządku malejącym, które nie są lekturą i których cena jest większa niż 20 zł.
+
+#	11.Wyświetl wszystkie dane z tabeli book tłumacząc nazwy kolumn na język polski.
+SELECT 
+title AS tytuł,
+author AS autor,
+published AS data_publikacji,
+isbn AS numer_ISBN,
+category AS kategoria,
+page_count AS liczba_stron,
+publisher AS wydawca,
+price AS cena FROM book;
